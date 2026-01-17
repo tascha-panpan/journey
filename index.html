@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weekly Habit Tracker</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js');
+  }
+</script>
+</head>
+<body>
+
+<div class="tracker-container">
+    <header>
+        <h1>Weekly Momentum</h1>
+        <p>Success is found in your daily routine.</p>
+    </header>
+
+    <div class="habit-grid" id="habitGrid">
+        <div class="grid-header">Habit</div>
+        <div class="grid-header">M</div>
+        <div class="grid-header">T</div>
+        <div class="grid-header">W</div>
+        <div class="grid-header">T</div>
+        <div class="grid-header">F</div>
+        <div class="grid-header">S</div>
+        <div class="grid-header">S</div>
+
+        <div class="habit-name">🧘 Meditation</div>
+        <input type="checkbox" class="habit-check" data-habit="med">
+        <input type="checkbox" class="habit-check" data-habit="med">
+        <input type="checkbox" class="habit-check" data-habit="med">
+        <input type="checkbox" class="habit-check" data-habit="med">
+        <input type="checkbox" class="habit-check" data-habit="med">
+        <input type="checkbox" class="habit-check" data-habit="med">
+        <input type="checkbox" class="habit-check" data-habit="med">
+
+        <div class="habit-name">🤖 AI Training (15m)</div>
+        <input type="checkbox" class="habit-check" data-habit="ai">
+        <input type="checkbox" class="habit-check" data-habit="ai">
+        <input type="checkbox" class="habit-check" data-habit="ai">
+        <input type="checkbox" class="habit-check" data-habit="ai">
+        <input type="checkbox" class="habit-check" data-habit="ai">
+        <input type="checkbox" class="habit-check" data-habit="ai">
+        <input type="checkbox" class="habit-check" data-habit="ai">
+
+        <div class="habit-name">🦶 Foot Separator</div>
+        <input type="checkbox" class="habit-check" data-habit="foot">
+        <input type="checkbox" class="habit-check" data-habit="foot">
+        <input type="checkbox" class="habit-check" data-habit="foot">
+        <input type="checkbox" class="habit-check" data-habit="foot">
+        <input type="checkbox" class="habit-check" data-habit="foot">
+        <input type="checkbox" class="habit-check" data-habit="foot">
+        <input type="checkbox" class="habit-check" data-habit="foot">
+
+        <div class="habit-name">🧘‍♂️ Stretch</div>
+        <input type="checkbox" class="habit-check" data-habit="stretch">
+        <input type="checkbox" class="habit-check" data-habit="stretch">
+        <input type="checkbox" class="habit-check" data-habit="stretch">
+        <input type="checkbox" class="habit-check" data-habit="stretch">
+        <input type="checkbox" class="habit-check" data-habit="stretch">
+        <input type="checkbox" class="habit-check" data-habit="stretch">
+        <input type="checkbox" class="habit-check" data-habit="stretch">
+
+        <div class="habit-name">🪙 Crypto Reading (15m)</div>
+        <input type="checkbox" class="habit-check" data-habit="crypto">
+        <input type="checkbox" class="habit-check" data-habit="crypto">
+        <input type="checkbox" class="habit-check" data-habit="crypto">
+        <input type="checkbox" class="habit-check" data-habit="crypto">
+        <input type="checkbox" class="habit-check" data-habit="crypto">
+        <input type="checkbox" class="habit-check" data-habit="crypto">
+        <input type="checkbox" class="habit-check" data-habit="crypto">
+
+        <div class="habit-name">🏮 Chinese Lesson (1h)</div>
+        <input type="checkbox" class="habit-check" data-habit="chinese">
+        <input type="checkbox" class="habit-check" data-habit="chinese">
+        <input type="checkbox" class="habit-check" data-habit="chinese">
+        <input type="checkbox" class="habit-check" data-habit="chinese">
+        <input type="checkbox" class="habit-check" data-habit="chinese">
+        <input type="checkbox" class="habit-check" data-habit="chinese">
+        <input type="checkbox" class="habit-check" data-habit="chinese">
+
+        <div class="habit-name">💍 Oura Activity (4/7)</div>
+        <input type="checkbox" class="habit-check" data-habit="oura">
+        <input type="checkbox" class="habit-check" data-habit="oura">
+        <input type="checkbox" class="habit-check" data-habit="oura">
+        <input type="checkbox" class="habit-check" data-habit="oura">
+        <input type="checkbox" class="habit-check" data-habit="oura">
+        <input type="checkbox" class="habit-check" data-habit="oura">
+        <input type="checkbox" class="habit-check" data-habit="oura">
+    </div>
+
+    <footer>
+        <button class="primary-btn" onclick="window.print()">Save PDF / Print</button>
+        <button id="clearBtn">Reset Week</button>
+    </footer>
+</div>
+
+<script>
+    // Logic to save progress in browser memory
+    const checkboxes = document.querySelectorAll('.habit-check');
+    
+    // Load saved data
+    checkboxes.forEach((cb, index) => {
+        const saved = localStorage.getItem('habit-' + index);
+        if (saved === 'true') cb.checked = true;
+        
+        cb.addEventListener('change', () => {
+            localStorage.setItem('habit-' + index, cb.checked);
+        });
+    });
+
+    // Reset button
+    document.getElementById('clearBtn').addEventListener('click', () => {
+        if(confirm('Clear all progress for the week?')) {
+            checkboxes.forEach((cb, index) => {
+                cb.checked = false;
+                localStorage.removeItem('habit-' + index);
+            });
+        }
+    });
+</script>
+
+</body>
+</html>

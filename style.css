@@ -1,0 +1,122 @@
+:root {
+    --primary: #4a90e2;
+    --accent: #f39c12; /* Oura Ring / Activity color */
+    --bg: #f4f7f6;
+    --text: #2d3436;
+    --border: #dfe6e9;
+}
+
+body {
+    background-color: var(--bg);
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    display: flex;
+    justify-content: center;
+    padding: 40px 10px;
+    margin: 0;
+}
+
+.tracker-container {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+    width: 100%;
+    max-width: 850px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+h1 { margin: 0; font-weight: 800; color: #1e272e; letter-spacing: -0.5px; }
+header p { color: #7f8c8d; margin-top: 8px; font-style: italic; }
+
+.habit-grid {
+    display: grid;
+    grid-template-columns: 2.5fr repeat(7, 1fr);
+    gap: 12px;
+    align-items: center;
+}
+
+.grid-header {
+    font-weight: 700;
+    text-align: center;
+    padding-bottom: 20px;
+    color: #b2bec3;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+}
+
+.habit-name {
+    font-weight: 600;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.95rem;
+}
+
+/* Checkbox Styling */
+.habit-check {
+    appearance: none;
+    width: 28px;
+    height: 28px;
+    background-color: #fff;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    justify-self: center;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.habit-check:checked {
+    background-color: var(--primary);
+    border-color: var(--primary);
+    transform: scale(1.05);
+}
+
+/* Special color for the Oura goal */
+.habit-check[data-habit="oura"]:checked {
+    background-color: var(--accent);
+    border-color: var(--accent);
+}
+
+.habit-check:checked::after {
+    content: '✓';
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 16px;
+    font-weight: bold;
+}
+
+footer {
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+button {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+}
+
+.primary-btn { background: var(--primary); color: white; }
+#clearBtn { background: transparent; color: #fab1a0; border: 1px solid #fab1a0; }
+#clearBtn:hover { background: #fab1a0; color: white; }
+
+@media (max-width: 700px) {
+    .habit-grid { grid-template-columns: 1fr; gap: 5px; }
+    .grid-header { display: none; }
+    .habit-name { border: none; padding-bottom: 5px; text-align: center; }
+    .habit-check { display: inline-block; margin: 4px; }
+    footer { flex-direction: column; gap: 15px; }
+}
